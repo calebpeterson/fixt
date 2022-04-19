@@ -1,0 +1,25 @@
+#!/bin/zsh --login
+
+# Handle CLI flags
+for arg in "$@"; do
+  if [[ "$arg" == "--history" ]] || [[ "$arg" == "-H" ]]; then
+    cat ~/.fixt_history
+    exit 0
+  fi
+done
+
+# detect if GNU readlink is available on OS X
+if [ "$(uname)" = "Darwin" ]; then
+  which greadlink >/dev/null || {
+    printf 'GNU readlink not found\n'
+    exit 1
+  }
+  alias readlink="greadlink"
+fi
+
+# Default behavior, capture previous command, fix it, and run it
+export HISTFILE=~/.zsh_history
+fc -R >/dev/null
+PREV_CMD=$(fc -nl -1 | tail -n 2 | head -n 1)
+ROOTDIR=$(dirname $(readlink -f $(which fixt)))
+node $ROOTDIR/index.js $PREV_CMD
