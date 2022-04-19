@@ -9,7 +9,27 @@ if (process.argv.length !== 3) {
 
 const commandToFix = process.argv[2];
 
-console.log(commandToFix);
+const ruleSets = require("require-all")(__dirname + "/rules");
+
+const applyRule = (rule, command) => {
+  if (rule.test && (rule.test === command || rule.test.test(command))) {
+    return rule.apply(command);
+  }
+  return command;
+};
+
+let fixedCommand = commandToFix;
+Object.values(ruleSets).forEach((ruleOrRules) => {
+  if (Array.isArray(ruleOrRules)) {
+    ruleOrRules.forEach((rule) => {
+      fixedCommand = applyRule(rule, fixedCommand);
+    });
+  } else {
+    fixedCommand = applyRule(ruleOrRules, fixedCommand);
+  }
+});
 
 const HISTORY_FILENAME = path.join(os.homedir(), `.fixt_history`);
 fs.writeFileSync(HISTORY_FILENAME, `${commandToFix}${os.EOL}`, { flag: "a" });
+
+console.log(commandToFix, "→", fixedCommand);
