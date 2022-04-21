@@ -22,4 +22,6 @@ export HISTFILE=~/.zsh_history
 fc -R >/dev/null
 PREV_CMD=$(fc -nl -1 | tail -n 2 | head -n 1)
 ROOTDIR=$(dirname $(readlink -f $(which fixt)))
-node $ROOTDIR/index.js $PREV_CMD
+FIXED=$(node $ROOTDIR/index.js $PREV_CMD)
+
+eval $FIXED

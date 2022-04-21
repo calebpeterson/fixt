@@ -32,4 +32,4 @@ Object.values(ruleSets).forEach((ruleOrRules) => {
 const HISTORY_FILENAME = path.join(os.homedir(), `.fixt_history`);
 fs.writeFileSync(HISTORY_FILENAME, `${commandToFix}${os.EOL}`, { flag: "a" });
 
-console.log(commandToFix, "→", fixedCommand);
+console.log(fixedCommand);
