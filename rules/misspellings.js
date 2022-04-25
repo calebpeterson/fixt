@@ -19,4 +19,12 @@ module.exports = [
     test: /clera/,
     apply: (command) => command.replace(/clera/gi, "clear"),
   },
+  {
+    test: /sattus/,
+    apply: (command) => command.replace(/sattus/gi, "status"),
+  },
+  {
+    test: /tsatus/,
+    apply: (command) => command.replace(/tsatus/gi, "status"),
+  },
 ];
