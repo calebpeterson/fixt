@@ -13,7 +13,7 @@ module.exports = [
   },
   {
     test: /gti/,
-    apply: (command) => command.replace(/gti/gi, "amend"),
+    apply: (command) => command.replace(/gti/gi, "git"),
   },
   {
     test: /clera/,
