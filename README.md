@@ -18,7 +18,7 @@ _Enter `fixt` - a rule-based tool that'll grab the previous command, fix it, and
 
 ## Extending the rules
 
-Add additional rules/files to `rules/*.js*` like so:
+Add additional rules/files to `rules/*.js` like so:
 
 ```js
 module.exports = [
