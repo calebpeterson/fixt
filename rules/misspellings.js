@@ -24,7 +24,15 @@ module.exports = [
     apply: (command) => command.replace(/sattus/gi, "status"),
   },
   {
+    test: /staatus/,
+    apply: (command) => command.replace(/staatus/gi, "status"),
+  },
+  {
     test: /tsatus/,
     apply: (command) => command.replace(/tsatus/gi, "status"),
+  },
+  {
+    test: /tatus/,
+    apply: (command) => command.replace(/tatus/gi, "status"),
   },
 ];
